@@ -1,0 +1,161 @@
+
+  <% if page == 'index' %>
+    <div id="<%= dom_id post %>">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <div class="columns">
+            <div class="column is-two-thirds">
+              <p class="title"><%= post.titulo %></p>
+              <p class="subtitle"><%= post.sigla_ramo %></p>
+              <table class="table is-hoverable">
+
+                <tbody>
+                  <tr>
+                    <td>Precio</td>
+                    <td><%= post.precio %></td>
+
+                  </tr>
+                  <tr>
+                    <td>Descripción</td>
+                    <td><%= post.descripcion %></td>
+
+                  </tr>
+                  <tr>
+                    <td>Profe</td>
+                    <td><%= post.user.name %></td>
+
+                  </tr>
+                  <tr>
+                    <td>Categoría</td>
+                    <td><%= post.categoria %></td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="column ">
+
+
+            </div>
+          </div>
+          <% if user_signed_in? %>
+            <div class="buttons is-centered">
+
+              <button class="button is-primary is-focused is-pulled-left is-inverted" 
+              onclick="window.location.href='<%= post_path(post) %>'">Ver publicación</button>
+
+              <% if post.user != current_user%>
+                <%= button_to "Solicitar clase", new_solicit_path(post_id: post.id), method: :get, class: "button is-primary is-focused is-pulled-left" %>
+              <% end %>
+            </div>
+          <% end %>
+
+        </article>
+
+      </div>
+    </div>
+
+  <% elsif page == 'perfil' %>
+    <div id="<%= dom_id post %>">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title"><%= post.titulo %></p>
+          <p class="subtitle"><%= post.sigla_ramo %></p>
+          <table class="table is-hoverable">
+
+            <tbody>
+              <tr>
+                <td>Precio</td>
+                <td><%= post.precio %></td>
+
+              </tr>
+              <tr>
+                <td>Descripción</td>
+                <td><%= post.descripcion %></td>
+
+              </tr>
+              <tr>
+                <td>Profe</td>
+                <td><%= post.user.name %></td>
+
+              </tr>
+              <tr>
+                <td>Categoría</td>
+                <td><%= post.categoria %></td>
+
+              </tr>
+
+            </tbody>
+          </table>
+          <button class="button is-primary is-focused is-pulled-right is-inverted" 
+          onclick="window.location.href='<%= post_path(post) %>'">Ver publicación</button>
+        </article>
+      </div>
+    </div>
+
+  <% else %>
+    <br>
+    <div id="<%= dom_id post %>" class="columns is-gapless is-multiline is-fullheight">
+      <div class="container is-fullheight is-fullwidth">
+        <div class="container is-parent is-fullheight">
+          <article class="container is-child box is-fullheight ">
+            <p class="title is-2"><%= post.titulo %></p>
+            <p class="subtitle is-3"><%= post.sigla_ramo %></p>
+            <table class="table is-hoverable">
+
+              <tbody>
+                <tr>
+                  <td>Precio</td>
+                  <td><%= post.precio %></td>
+
+                </tr>
+                <tr>
+                  <td>Descripción</td>
+                  <td><%= post.descripcion %></td>
+
+                </tr>
+                <tr>
+                  <td>Profe</td>
+                  <td><%= post.user.name %></td>
+
+                </tr>
+                <tr>
+                  <td>Categoría</td>
+                  <td><%= post.categoria %></td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          <div>
+            <%= button_to "Disponibilidad de horas", calendar_path(post_id: @post.id), method: :get, 
+            class: "button is-primary" %>
+          </div>
+          </article>
+
+  
+          
+
+          <article class="container is-child box">
+
+            <p class="title has-text-weight-light">Comentarios</p>
+            <p class="subtitle">Revisa las reseñas de tus compañeros o coméntanos como te fue con la clase!</p>
+            <% if user_signed_in? %>
+              <p>
+                  <%= render post.comments %>
+                  <%= render partial: 'comments/form', locals: { post: post } %>
+
+              </p>
+
+            <% end %>
+
+          </article>
+
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "neural-cirrus-389915",
+  "private_key_id": "153c7a5c11aea88246fe46c95ae846568b199321",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7ZpHLalJPTnEb\nQz0Vx4v/2y+K2VqEm9unxA8x+TOTL38haxh3VuiII3csHMVbX/L8jWr9MsXCN2Fb\nKM4HTcmJR93pBhoIY9M1IFnh+fg7bPWf3eERJHByLBGrUS2PZRKqNvd1sPCEU452\nyL3Otu8mbCKUveWeG7xD5vqBOAc5xkwoB6l4dCSsoR2eJw8QLblG7m0re5MAo89e\nf+R4Cj0Bgkhf5Q/I1UZUhrTlSZQFq0GZV8kvf+WOlwLJ+jQg2nXKRBEebXE3ubIz\nT9c6/26viNmZJrA3l+zI5V9eLtU2IHndYF/AV3AioJC+qITtINeFBRgIELIdewJ7\nXXm6g5qTAgMBAAECggEAS3p4ZlGgbUjOzYg7ZjZE8Pw7HdWFW7vasKuK4znXyARt\nU+xqokZiydJfAWllI/R1Tbs3yFtWw27Cy5CXyuFNtvk3K8/FVHPAcblh+l5P2L99\n/rHDIMBoedO+Gh5MF2FCL0SMTt7BQMrWqokXydZsZDFRjE8f2JqbLU4uvzTt1BqV\nZqJlJL2f3FBdjprdftxdqGPb3XVNmqfZ8KSyMcde8a7wMoVfnO94WC/zKw1X1S1o\nWP5FM/fTy4N+f6Rj1ZVcbUzKZZ7Uecvvgs79Gl2wUKAVSNVfinxDnvmk6O2jIuCp\nIUBVRW/59vScyCEe5r8f4gIj1rdTH0eUmtGMDIDE4QKBgQDqA8YDyICftOfPAZc6\nrSbuwsnNEi7loI/3nXTVDke0pywgH4FEm/r6w7VtexiMGIXo4c3gp4LnoPbGxRMp\nQmmOTNnYK2ezQvHr+YBfZ1cG1x/IphDy/00ll5wAjQI03J2Q+vMeSrysCJyH7iTE\nxZKkLv3O/F5iiDCJF5mrBSBi7wKBgQDNAbFz9kvY0itXswTyb2wndWzvOa5UibpW\n/igW1mfxM8Heh3vJSmwltNC0DAi8LS6uWavU4T4hARGIEDPIFfF8bp9pYRtyOYTX\nqAm8thvUcgei9dov5UZ9h9K9fNnNEuigeg6w2566kZeH5Uomuft1AL17UGiLzfsu\nTO7rFe/ynQKBgAbriaV+/l66qMg0UdaIXEhfNjx8NyrPLrKx00yhmXk8IE/q3pW6\nzxcvRmQwaa9q4jrawo3MJlDXL7T9Cu4Dar+sghykW/KvHhxOSn+HvMkU/3mdf47Q\nAeYEr7ZMdS4+/+HTqfDRYPbtYkOaxTeUaBu20AaY6+maAWVsbzzhb+29AoGAJI7j\nvUEzv2OjVQ1YmX8jM1ouZe7MVskE0NScA46SlKHdNbjFa1z5MjQvb5whxqTsCS12\nhgzwzmPpY3E4OrsnCECV7u3hPhphxS9zJRL4nYcEM5xSH25shqA9BYuJL5fqoguC\nKSnRAYZLFnHeKk/KNtA9+gqZyiyeWWBgzs1nr8UCgYBh/mul/BXWVIYnNm5IDRVg\nvzfApL4lR/MJRI1uIW9/VAENXQWkHdFFEisZeToyyQYPnFhywhiEJMTbzkba84Xs\nl0t6b0UdwfEdeErK8GkCMmA7RsIPSZ25JV1UGa52FnVVcdP4Y68aGQNEHzs2p+4r\nLOh8mbtu+RZXrcx8mJ8z5A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "test-softdelete@neural-cirrus-389915.iam.gserviceaccount.com",
+  "client_id": "117060036835546605572",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/test-softdelete%40neural-cirrus-389915.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

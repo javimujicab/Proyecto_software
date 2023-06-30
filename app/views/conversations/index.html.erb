@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<style>
+  .button-spacing {
+    margin-bottom: 10px;
+  }
+  .section-spacing {
+    margin-bottom: 20px;
+  }
+  .custom-color-button {
+    background-color: red;
+  }
+  .user-container {
+    display: flex;
+    align-items: center;
+  }
+  .user-container .user-name-container {
+    margin-left: 10px;
+  }
+  .delete-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .conversation-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .delete-button-container {
+    margin-left: auto;
+  }
+
+</style>
+
+
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="<%= root_path %>" class="navbar-item">
+              Home
+            </a>
+
+            <a href="<%= posts_path %>"class="navbar-item">
+              Todas las publicaciones
+            </a>
+            
+            <span class="navbar-item">
+              <a href="<%=perfil_path%>" class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Mi Perfil</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        Chatea con tus compañeros y study buddies
+      </p>
+      <p class="subtitle">
+        Organiza tus clases y resuelve tus dudas
+      </p>
+    </div>
+  </div>
+    <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+
+  </div>
+</section>
+
+
+<div class="container">
+  <div class="columns is-variable is-5">
+    <div class="column is-4">
+      <br>
+      <h3 class="title is-3">Todos los usuarios</h3>
+      <% @users.each do |user| %>
+        <% if user.id != current_user.id %>
+          <%= form_with(url: conversations_path, method: :post) do |f| %>
+            <%= f.hidden_field :sender_id, value: current_user.id %>
+            <%= f.hidden_field :recipient_id, value: user.id %>
+            <%= f.submit "Enviar mensaje a #{user.name}", class: "button is-fullwidth is-primary button-spacing" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="column is-1"></div>
+    <div class="column is-7">
+     <br>
+      <h3 class="title is-3 ">Conversaciones</h3>
+      <% @conversations.each do |conversation| %>
+        <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+          <% recipient = conversation.sender_id == current_user.id ? User.find(conversation.recipient_id) : User.find(conversation.sender_id) %>
+          <div class="columns section-spacing conversation-container">
+            <div class="column is-flex is-align-items-center">
+              <div class="user-container">
+                <div class="inline-block nudge-down-10">
+                  <p class="image is-32x32">
+                    <%= image_tag("icono3.png", alt: "Descripción de la imagen") %>
+                  </p>
+                </div>
+                <div class="inline-block user-name-container">
+                  <%= link_to recipient.name, conversation_messages_path(conversation), class: 'has-text-primary' %>
+
+
+                </div>
+              </div>
+              <div class="inline-block delete-button-container">
+                <%= button_to conversation_path(conversation), method: :delete, class: "button is-light is-small has-background-transparent", onclick: "showDeleteConfirmation(event);" do %>
+                  <span class="icon is-small has-text-grey">
+                    <i class="fas fa-trash-alt"></i>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .swal2-popup .swal2-icon.swal2-warning {
+    background-color: hsl(171, 100%, 41%); /* Set the background color to transparent */
+    border-color: transparent; /* Set the border color to transparent */
+    color: hsl(0, 0%, 100%); /* Replace with your primary color */
+  }
+</style>
+
+<script>
+  function showDeleteConfirmation(event) {
+    event.preventDefault();
+
+    Swal.fire({
+      title: 'Borrar chat',
+      text: '¿Estás seguro de que deseas borrar este chat?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'button is-primary',
+        cancelButton: 'button'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        event.target.closest('form').submit();
+      }
+    });
+  }
+</script>

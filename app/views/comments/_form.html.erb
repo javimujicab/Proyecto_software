@@ -1,0 +1,37 @@
+<% found_solicit = nil %>
+<% current_user.solicits.each do |solicit| %>
+  <% if @post && solicit.post.id == @post.id && solicit.aceptado == "aceptado" %>
+    <% found_solicit = solicit %>
+    <% break %>
+  <% end %>
+<% end %>
+
+<% if found_solicit %>
+  <form action="<%= post_comments_path(post) %>" method="post">
+    <br>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= image_tag("icono3.png", alt: "Descripción de la imagen") %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <textarea class="textarea" name="comment[content]" placeholder="Escribe un comentario..."></textarea>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-right">
+            <div class="level-item">
+              <input type="submit" class="button is-primary is-light is-outlined" value="Enviar">
+
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+
+  </form>
+<% end %>

@@ -1,0 +1,141 @@
+  <style>
+
+table {border-collapse: collapse;
+width: 100%;}
+
+  h1 {
+    color: blue;
+  }
+  
+
+  table {
+    border-collapse: collapse;
+  }
+  td, th {
+    font-family: "Lucida Grande", arial, helvetica, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid #999;
+  }
+
+  th {
+    background: #27f3c7;
+    color: #0c0606;
+    text-align: center;
+    width: 14.2857142857143%;
+  }
+
+  td {
+    background: #FFF;
+    color: #777;
+    height: 80px;
+    vertical-align: top;
+    font-size: 16px;}
+
+
+  </style>
+  
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <span class="navbar-item">
+              <a href="<%= post_show_path(id: @post_id)%>" class="button is-primary is-inverted">
+                <span>Volver a la Publicación</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title is-1">
+        Calendario
+      </p>
+      <p class="subtitle">
+        Organiza tus horas de clases...
+      </p>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+  
+  </div>
+</section>
+
+<% @post_id %>
+<% @solicitudes = Solicit.where(post_id: @post_id)
+   @solicitudes.each do |solicitud| %>
+   <% if solicitud.aceptado == "aceptado" %>
+      <% solicitud.fecha %>
+   <% end %>
+   <% end %>
+
+<% @date = params[:date] ? Date.parse(params[:date]) : Date.today %>
+
+<div class="tabs is-fullwidth">
+  <ul>
+    <li>
+      <a>
+        <span><%= link_to "< Mes anterior", date: @date.prev_month %></span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <div class="container">
+          <h2 id="month" class="is-size-2 has-text-centered">
+            <%= l(@date, format: "%B %Y") %>
+          </h2>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span><%= link_to "Siguiente mes>", date: @date.next_month %></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="container has-text-center">
+  <% @solicitud_by_date = @solicitudes.group_by(&:fecha) %>
+  <%= calendar @date do |date| %>
+    <%= date.day %>
+    <% if @solicitud_by_date[date] %>
+      <ul>
+        <% @solicitud_by_date[date].each do |solicitud| %>
+          <% if solicitud.aceptado == "aceptado" %>
+            <span class="tag is-primary is-medium">Clase Agendada</span>
+          <% elsif solicitud.aceptado == "pendiente" %>
+            <span class="tag is-primary is-medium">Clase Pendiente</span>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+
+  
+
+
+
+

@@ -1,0 +1,72 @@
+<style>
+  body {
+    background-color: rgba(0, 209, 177,0.3); /* Color primario con transparencia */
+    height: 100vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0;
+  }
+</style>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <body>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+
+        <div class="container is-max-desktop is-centered "style="max-width: 600px; ">
+          <div class="notification is-white">
+
+            <label class="label has-text-primary is-size-4" style="font-weight: 600;">Registrarse</label>
+
+
+            <div class="field">
+              <%= f.label :email,"Email", class: "label has-text-black is-size-5", style: "font-weight: 350;"%>
+
+              <%= f.email_field :email, class: "input is-primary is-small is-rounded", autofocus: true, autocomplete: "email", placeholder:"Example@uc.cl" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password, "Contraseña", class: "label has-text-black is-size-5", style: "font-weight: 350;" %>
+              <%= f.password_field :password, class: "input is-primary is-small is-rounded", autocomplete: "new-password", placeholder: "Password123"%>
+              <% if @minimum_password_length %>
+                    <em style="font-size: smaller; ">(<%= @minimum_password_length %> caracteres mínimo)</em>
+
+              <% end %>
+
+
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation, "Confirmar Contraseña", class: "label has-text-black is-size-5", style: "font-weight: 350;" %>
+              <%= f.password_field :password_confirmation, class: "input is-primary is-small is-rounded", autocomplete: "new-password", placeholder: "Password123" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :name, "Nombre", class: "label has-text-black is-size-5", style: "font-weight: 350;" %>
+              <%= f.text_field :name, class: "input is-primary is-small is-rounded", placeholder: "Sara Thompson" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :avatar, "Foto de perfil", class: "label has-text-black is-size-5", style: "font-weight: 350;" %>
+              <%= f.file_field :avatar %>
+            </div>
+
+
+
+            <div class="buttons" style="display: flex; justify-content: flex-end;">
+
+              <a href="<%= root_path %>" class="button">Volver atrás</a>
+              <div class="actions">
+                <%= f.submit "Registrarse",class: "button is-primary"%>
+              </div>
+
+
+            </div>
+
+
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

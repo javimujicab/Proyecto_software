@@ -1,0 +1,146 @@
+<style>
+  body {
+    background-color: rgba(242, 242, 242,0.4); /* Color primario con transparencia */
+    height: 250vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0;
+  }
+</style>
+
+
+
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="<%=posts_index_path%>" class="navbar-item ">
+              <span>Todas las Publicaciones</span>
+            </a>
+            <a href="<%=perfil_path%>" class="navbar-item ">
+              <span>Mi Perfil</span>
+            </a>
+            <a href="<%= root_path %>" class="navbar-item is-active">
+              Home
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        Clases para todos
+      </p>
+      <p class="subtitle">
+        Encuentra tu study buddy para cualquier ramo
+      </p>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+
+  </div>
+</section>
+
+
+<%= render partial: post, locals: { page: 'detallado' } %>
+
+<div>
+
+  <% if user_signed_in? && current_user == @post.user %>
+    <article class="container is-child box">
+      <p class="title has-text-weight-light">Solicitudes recibidas</p>
+      <p class="subtitle">Acepta o rechaza las solicitudes que han hecho de tu clase</p>
+
+
+        <p>
+        <table class="table is-hoverable">
+
+          <tbody>
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha</th>
+              <th>Mensaje</th>
+              <th>Estado</th>
+
+
+            </tr>
+            <% @post.solicits.each do |solicit| %>
+              <tr>
+                <td><%= solicit.user.name %></td>
+                <td><%= solicit.fecha%></td>
+                <td><%= solicit.mensaje %></td>
+                <td><%= solicit.aceptado %></td>
+                <% if solicit.aceptado == 'pendiente'%>
+                  <td><%= button_to "Aceptar", aceptar_solicit_path(solicit_id: solicit.id, post_id: post.id), class: "link"%></td>
+                  <td><%= button_to "Rechazar", rechazar_solicit_path(solicit_id: solicit.id, post_id: post.id), class: "link"%></td>
+                <% end %>
+              </tr>
+            <% end %>
+
+
+          </tbody>
+        </table>
+
+
+
+        </p>
+
+
+
+    </article>
+    <br>
+    <div class="buttons is-centered">
+
+      <button class="button is-primary is-focused is-pulled-left is-inverted" 
+      onclick="window.location.href='<%= editing_post_path(@post) %>'">Editar publicación</button>
+      <%= button_to "Borrar publicación", @post, 
+      method: :delete, class: "button is-primary is-focused is-pulled-left" %>
+
+    </div>
+
+
+  <% end %>
+  <div class="container">
+    <div class="is-flex justify-end">
+      <% if user_signed_in? && current_user != @post.user %>
+        <%= form_with(url: conversations_path, method: :post) do |form| %>
+          <%= form.hidden_field :sender_id, value: current_user.id %>
+          <%= form.hidden_field :recipient_id, value: @post.user.id %>
+          <%= form.submit "Enviar mensaje a #{@post.user.name}", class: "button is-primary" %>
+          
+        <% end %>
+        <br>
+        
+      <% end %>
+    </div>
+    <br>
+    <% if user_signed_in? && current_user != @post.user %>
+      <%= button_to "Solicitar clase", new_solicit_path(post_id: @post.id), method: :get, class: "button is-primary is-focused is-pulled-left is-inverted" %>
+    <% end %>
+ </div>
+  
+    <%#= link_to "Enviar mensaje a #{@post.user.name}", conversations_path(sender_id: current_user.id, recipient_id:
+    @post.user.id), method: 'post', class:"button is-link"%>
+  <%# else %>
+    <%# link_to "Conversations", conversations_path %>
+  <%# end %>
+</div>
+
+
+</div>

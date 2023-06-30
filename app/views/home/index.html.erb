@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de inicio</title>
+  <!-- Agrega tus enlaces de estilos CSS y scripts JS aquí -->
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- Contenido del encabezado, como el logotipo y el menú de navegación -->
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <nav class="navbar">
+        <div class="container">
+          <div id="navMenu" class="navbar-menu">
+            <div class="navbar-start">
+              <%= link_to "Clases particulares", posts_index_path , class:"navbar-item"%>
+                
+              </a>
+            </div>
+
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                    <span class="navbar-item">
+                        <% if user_signed_in? %>
+                            <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "button is-dark" %>
+                        <% else %>
+                            <%= link_to "Iniciar Sesión", new_user_session_path, class: "button is-dark" %>
+                        <% end %>
+                    </span>
+                    <span class="navbar-item">
+                        <% if user_signed_in? %>
+                            <%= link_to "Mi Perfil", perfil_path, class: "button is-primary" %>
+                        <% else %>
+                            <%= link_to "Registrarse", new_user_registration_path, class:"button is-primary" %>
+                        <% end %>
+                    </span>
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero is-primary is-fullheight-with-navbar">
+        <iframe src="https://javimujicab.github.io/Test/" width="100%" height="3550"></iframe>
+      </section>
+    <!-- Otro contenido principal de la página de inicio -->
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <!-- Contenido del pie de página, como enlaces de contacto y derechos de autor -->
+  </footer>
+
+  <!-- Agrega tus scripts JS al final del cuerpo de la página -->
+</body>
+</html>

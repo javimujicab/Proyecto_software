@@ -1,0 +1,124 @@
+<style>
+  body {
+    background-color: rgba(0, 209, 177,0.3);
+    height: 120vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0; /* Color primario con transparencia */
+  }
+</style>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <body>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+
+        <div class="container is-max-desktop is-centered "style="max-width: 600px; ">
+          <div class="notification is-white">
+
+            <label class="label has-text-primary is-size-4" style="font-weight: 600;">EDITAR PERFIL</label>
+
+
+              <div>
+                <p class="title is-5"><%= f.label :email, style: "display: block" %></p>
+                <%= f.email_field :email, class: "input is-primary is-small is-hovered", autofocus: true, autocomplete: "email"  %>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+              <br>
+              <div class="field">
+
+                <p class="title is-5"><%= f.label :Contraseña, style: "display: block" %></p><i>(Dejar en blanco si no se desea cambiar)</i>
+                <%= f.password_field :password, class: "input is-primary is-small is-hovered", autocomplete: "new-password"  %>
+
+                <% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> caracteres mínimos</em>
+                <% end %>
+              </div>
+
+
+
+
+              <div class="field">
+                <p class="title is-5"><%= f.label :Confirmar_contraseña, style: "display: block" %></p>
+                <%= f.password_field :password_confirmation, class: "input is-primary is-small is-hovered", autocomplete: "new-password"  %>
+              </div>
+
+              <div class="field">
+                <p class="title is-5"><%= f.label :Contraseña_Actual, style: "display: block" %></p><i>(Necesitamos tu contraseña para realizar los cambios)</i>
+                <%= f.password_field :current_password, class: "input is-primary is-small is-hovered", autocomplete: "current-password"  %>
+              </div>
+
+
+              <div class="field">
+                <p class="title is-5"><%= f.label :Nombre, style: "display: block" %></p>
+                <%= f.text_field :name, class: "input is-primary is-small is-hovered" %>
+              </div>
+
+              <div class="actions" style="display: flex; justify-content: flex-end;">
+                <%= f.submit "Actualizar", class: "button is-primary" %>
+              </div>
+
+            <% end %>
+
+            <br>
+
+
+          <div class="buttons is-centered">
+            <div style="display: flex; justify-content: center;">
+              <div style="display: flex; justify-content: flex-end;">
+                <a href="<%= perfil_path %>" class="button">Volver atrás</a>
+              </div>
+              <div style="display: flex; justify-content: flex-end;">
+                <%= button_to "Cancelar mi cuenta", registration_path(resource_name),
+                  class: "button",onclick: "showDeleteConfirmation(event);",
+                  data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' },
+                  method: :delete %>
+              </div>
+            </div>
+          </div>
+<style>
+  .swal2-popup .swal2-icon.swal2-warning {
+    background-color: hsl(171, 100%, 41%); /* Set the background color to transparent */
+    border-color: transparent; /* Set the border color to transparent */
+    color: hsl(0, 0%, 100%); /* Replace with your primary color */
+  }
+</style>
+
+<script>
+  function showDeleteConfirmation(event) {
+    event.preventDefault();
+
+    Swal.fire({
+      title: 'Borrar cuenta',
+      text: '¿Estás seguro de que deseas borrar tu cuenta?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'button is-primary',
+        cancelButton: 'button'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        event.target.closest('form').submit();
+      }
+    });
+  }
+</script>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

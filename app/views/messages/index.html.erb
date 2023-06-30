@@ -1,0 +1,183 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="<%= root_path %>" class="navbar-item">
+              Home
+            </a>
+
+            <a href="<%= posts_path %>"class="navbar-item">
+              Todas las publicaciones
+            </a>
+            
+            <span class="navbar-item">
+              <a href="<%=perfil_path%>" class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Mi Perfil</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+       Chatea con tus compañeros y study buddies
+      </p>
+      <p class="subtitle">
+        Organiza tus clases y resuelve tus dudas
+      </p>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+
+  </div>
+</section>
+
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <br>
+      <% if @conversation.recipient.id == current_user.id %>
+        <h1 class="title is-4">Chat <%= @conversation.sender.name %></h1>
+      <% else %>
+        <h1 class="title is-4">Chat <%= @conversation.recipient.name %></h1>
+      <% end %>
+      <% if @over_ten %>
+        <%= link_to "Show previous", '?m=all', class:'button is-link' %>
+      <% end %>
+
+
+      <section id="messages" class="mb4">
+        <% @messages.each do |message| %>
+          <% user = User.find_by(id: message.user_id) %>
+          <% if message.body %>
+            <div class="box">
+              <div class="box-body">
+                <div class="columns is-vcentered">
+                  <div class="column is-1">
+                    <p class="image is-32x32">
+                      <%= image_tag("icono3.png", alt: "Descripción de la imagen") %>
+                    </p>
+                  </div>
+                  <div class="column is-10">
+                    <div class="inline-block">
+                      <strong><%= user.name %></strong> <%= message.message_time %>
+                    </div>
+                    <div class="block pt4" style="overflow-wrap: break-word;">
+                      <div class="f4"><%= (message.body) %></div>
+
+                    </div>
+                  </div>
+                  <% if current_user.id == message.user_id %>
+                    <div class="column is-1 has-text-right">
+                      <div class="inline-block">
+                        <%= form_with(model: message, url: destroy_message_path(id: message.id), method: :delete, local: true) do |form| %>
+                          <%= form.button type: :submit, class: "button is-light is-small has-background-transparent", onclick: "showDeleteConfirmation(event);" do %>
+                            <span class="icon is-small has-text-grey">
+                              <i class="fas fa-trash-alt"></i>
+                            </span>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </section>
+
+      <style>
+        .swal2-popup .swal2-icon.swal2-warning {
+          background-color: hsl(171, 100%, 41%); /* Set the background color to transparent */
+          border-color: transparent; /* Set the border color to transparent */
+          color: hsl(0, 0%, 100%); /* Replace with your primary color */
+        }
+      </style>
+
+      <script>
+        function showDeleteConfirmation(event) {
+          event.preventDefault();
+
+          Swal.fire({
+            title: 'Borrar mensaje',
+            text: '¿Estás seguro de que deseas borrar este mensaje?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, borrar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true,
+            customClass: {
+              confirmButton: 'button is-primary',
+              cancelButton: 'button'
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              event.target.closest('form').submit();
+            }
+          });
+        }
+      </script>
+
+      <%= form_for [@conversation, @message] do |f| %>
+        <div class="field">
+        <br>
+          <%= f.text_area :body, class: "textarea", placeholder: "Pregunta por tu clase..." %>
+        </div>
+        <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+        <div class="buttons is-right">
+          <button class="button is-primary is-light is-outlined">Enviar mensaje</button>
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .message-area {
+    margin-bottom: 1em;
+  }
+
+  .message-container:not(:last-child) {
+    margin-bottom: 0.3em; /* Eliminar esta línea o ajustar según sea necesario */
+  }
+
+  .message-container:not(:last-child) {
+    margin-bottom: 0.3em; /* Adjust the value as desired */
+  }
+
+  body {
+    background-color: rgba(242, 242, 242,0.4); /* Color primario con transparencia */
+    height: 200vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0;
+  }
+</style>

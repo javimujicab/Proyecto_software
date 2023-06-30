@@ -1,0 +1,25 @@
+
+<hr  />
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+        <%= image_tag("icono3.png", alt: "Descripción de la imagen") %>
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+        <p>
+            <strong><%= comment.user.name %></strong>
+            <br>
+            <p><%= comment.content%></p>
+        </p>
+        </div>
+
+    </div>
+    <% if user_signed_in? && current_user.id == comment.user_id %>
+        <div class="media-right">
+            <%= button_to "Borrar comentario", post_comment_path(comment.post_id, comment), method: :delete, class: "delete" %>
+        </div>
+    <% end %>
+
+</article>

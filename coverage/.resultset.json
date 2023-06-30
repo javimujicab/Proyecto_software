@@ -1,0 +1,188 @@
+{
+  "Unit Tests": {
+    "coverage": {
+    },
+    "timestamp": 1686786399
+  },
+  "RSpec": {
+    "coverage": {
+      "/home/cbarrientos/2023-1-grupo-02/test/controllers/articles_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/controllers/comments_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/controllers/home_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/controllers/posts_controller_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/controllers/solicits_controller_test.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/models/admin_user_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/models/comment_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/models/post_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          1,
+          0,
+          0,
+          null,
+          1,
+          0,
+          0,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/models/solicit_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/cbarrientos/2023-1-grupo-02/test/models/user_test.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1684984227
+  }
+}

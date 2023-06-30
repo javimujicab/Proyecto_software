@@ -1,0 +1,135 @@
+<style>
+  body {
+    background-color: rgba(242, 242, 242,0.4); /* Color primario con transparencia */
+    height: 300vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0;
+  }
+  .custom-select {
+  appearance: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.custom-select:focus {
+  outline: none;
+  box-shadow: 0 0 4px #aaa;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+</style>
+
+
+
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="<%= root_path %>" class="navbar-item">
+              Home
+            </a>
+            <% if  user_signed_in?%>
+              <a href="<%= new_post_path %>" class="navbar-item">
+              Crear publicación
+              </a>
+              <a href="<%= conversations_path %>" class="navbar-item">
+              Mensajes
+              </a>
+
+            <%end%>
+            <% unless user_signed_in?%>
+              <a href="<%= new_user_session_path %>"class="navbar-item">
+                Iniciar Sesión
+              </a>
+              <a href="<%=new_user_registration_path%>"class="navbar-item">
+                Sign up
+              </a>
+            <% end %>
+            <span class="navbar-item">
+              <a href="<%=perfil_path%>" class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Mi Perfil</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        Clases para todos
+      </p>
+      <p class="subtitle">
+        Encuentra tu study buddy para cualquier ramo
+      </p>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+
+  </div>
+</section>
+
+
+<div class="center-container" style="margin-top: 20px;">
+  <%= form_for "", url: posts_url, method: :get do |f| %>
+    <div class="field is-grouped">
+      <div class="control custom-icon-margin">
+        <span class="icon is-small is-left" style="margin-top: 15px;">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="control">
+        <%= f.select :filtro_categoria, ["-", "Matemáticas", "Programación", "Física", "Química", "Biología", "Economía", "Lenguaje", "Deportes", "Otro"], { selected: @filtro_categoria }, { class: "custom-select" } %>
+      </div>
+      <div class="control">
+        <%= f.submit "Filtrar", class: "button is-primary is-focused is-inverted" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent is-vertical">
+    <% @posts.each_slice(3) do |post_group| %>
+      <div class="tile is-child">
+        <div class="columns is-multiline">
+          <% post_group.each do |post| %>
+            <div class="column is-one-third">
+              <%= render partial: post, locals: { page: 'index' } %>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

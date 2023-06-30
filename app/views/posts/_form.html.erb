@@ -1,0 +1,74 @@
+<style>
+  body {
+    background-color: rgba(0, 209, 177,0.3); /* Color primario con transparencia */
+  }
+</style>
+
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> -> no podemos guardar tu post :( </h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+         <li><%= error.message %></li>
+
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <body>
+      <section class="hero is-fullheight">
+        <div class="hero-body">
+
+          <div class="container is-max-desktop is-centered "style="max-width: 600px; ">
+            <div class="notification is-white">
+
+              <label class="label has-text-primary is-size-3" style="font-weight: 600;">Crear Publicación</label>
+
+              <div>
+                <p class="title is-4"><%= form.label :Título, style: "display: block" %></p>
+                <%= form.text_field :titulo, class: "input is-primary is-small is-hovered", autofocus: true, placeholder: "De qué se tratarán las clases?" %>
+              </div>
+              <br>
+              <div>
+                <p class="subtitle"><%= form.label :Sigla_del_ramo, style: "display: block" %></p>
+                <%= form.text_field :sigla_ramo, class: "input is-primary is-small is-hovered", autofocus: true, placeholder: "Qué ramo enseñarás?" %>
+              </div>
+              <br>
+              <div>
+                <p class="subtitle is-6"><%= form.label :Precio, style: "display: block" %></p>
+                <%= form.text_field :precio, class: "input is-primary is-small is-hovered", autofocus: true, placeholder: "$$$" %>
+              </div>
+              <br>
+              <div>
+                <p class="subtitle is-6"><%= form.label :Descripción, style: "display: block" %></p>
+                <%= form.text_area :descripcion, class: "textarea is-primary", placeholder: "Explica cómo son tus clases y cómo puedes ayudar a tus alumnos" %>
+              </div>
+              <br>
+              <div>
+                <p class="subtitle is-6"><%= form.label :Categoría, style: "display: block" %></p>
+                <%= form.select :categoria, ["Matemáticas", "Programación", "Física", "Química", "Biología", "Economía", "Lenguaje", "Deportes","Otro"], :required => true %>
+              </div>
+              <br>
+
+
+              <div class="buttons" style="display: flex; justify-content: flex-end;">
+
+                <a href="<%= perfil_path %>" class="button">Volver atrás</a>
+                <div class="actions">
+                  <%= form.submit "Crear",class: "button is-primary"%>
+                </div>
+
+              </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+<% end %>

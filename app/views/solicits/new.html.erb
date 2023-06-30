@@ -1,0 +1,78 @@
+<style>
+  body {
+    background-color: rgba(242, 242, 242,0.4); /* Color primario con transparencia */
+    height: 100vh; /* Establece la altura del body al 100% de la ventana del navegador */
+    margin: 0;
+  }
+</style>
+
+
+
+<section class="hero is-primary is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="<%=posts_index_path%>" class="navbar-item ">
+              <span>Todas las Publicaciones</span>
+            </a>
+            <a href="<%=perfil_path%>" class="navbar-item ">
+              <span>Mi Perfil</span>
+            </a>
+            <a href="<%= root_path %>" class="navbar-item is-active">
+              Home
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        Pide tu clase
+      </p>
+      <p class="subtitle">
+        Elige la fecha que más te acomode y envía una solicitud
+      </p>
+    </div>
+  </div>
+  <div class="hero-foot">
+
+  </div>
+</section>
+
+<br>
+<br>
+<div class="tile is-parent">
+  <article class="tile is-child box">
+    <%= form_with model: @solicit do |f|%>
+        <%= f.label :fecha, class:"subtitle"%>
+        <br>
+      
+        <%= f.date_field :fecha%>
+        <br>
+        <br>
+
+        <%= f.label :mensaje, class: "subtitle"%>
+        <br>
+        <%= f.text_area :mensaje, class: "textarea is-primary", placeholder: "Aquí puedes indicar que temas quieres ver durante la clase o que esperas de ella..." %>
+        <br>
+      
+        <%= f.submit "Crear solicitud", class: "button is-primary is-focused is-pulled-right" %>
+    <% end %>
+  </article>
+</div>

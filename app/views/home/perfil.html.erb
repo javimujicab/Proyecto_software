@@ -1,0 +1,85 @@
+
+
+
+
+<div class="container-fluid" style="height: 100vh; display: flex; padding: 0;">
+    <div class="column is-one-quarter" style=" display: flex; background-color: #00D1B1;">
+
+
+        <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-primary" style="height: 100%; width: 100%;">
+                <div class="content has-text-centered" style="display: flex; flex-direction: column; justify-content: center;">
+
+                    <figure class="image is-256x256">
+                    
+                        <%= image_tag("icono3.png", alt: "Descripción de la imagen") %>
+
+
+
+                    </figure>
+                    <section class="section"></section>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= link_to "Crear Publicación", new_post_path, class: "button is-primary" %>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= link_to "Todas las Publicaciones", posts_path, class: "button is-primary" %>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= link_to "Editar perfil", edit_user_registration_path, class: "button is-primary" %>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= link_to "Mensajes", conversations_path, class: "button is-primary" %>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= button_to "Solicitudes enviadas", solicits_path(0), method: :get, class: "button is-primary"%>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= link_to "Home",root_path, class: "button is-primary"%>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "button is-primary is-inverted" %>
+                        </div>
+                    </div>
+
+
+                </div>
+            </article>
+        </div>
+
+    </div>
+    <div class="column" style=" display: flex ; background-color: #f2f2f2; flex-direction: column;">
+        <div class="sub-container" style="flex: 1; background-color: #f2f2f2; margin-bottom: 20px; display: flex; align-items: center; ">
+            <h2 class="title is-2 has-text-left" style="margin-right: 10px; font-weight: 400; color: #00D1B1;">Bienvenid@ <%= @user.name %></h2>
+        </div>
+        <div class="sub-container" style="flex: 1; background-color: #f2f2f2; margin-bottom: 20px;">
+            <h2 class="title is-4 has-text-left" style="margin-left: 10px; font-weight: 600;">Mis Publicaciones</h2>
+            <% @posts.each_slice(3) do |post_group| %>
+                <div class="tile is-child">
+                    <div class="columns is-multiline">
+                    <% post_group.each do |post| %>
+                        <div class="column is-one-third">
+                        <%= render partial: post, locals: { page: 'perfil' } %>
+                        </div>
+                    <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class="sub-container" style="flex: 1; background-color: #f2f2f2;"></div>
+    </div>
+    <!-- Contenido del contenedor a la derecha del mosaico aquí -->
+  </div>
+</div>
