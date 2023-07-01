@@ -84,6 +84,8 @@ gem 'activeadmin'
 gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
 
+gem 'google-cloud-storage'
+
 
 
 
